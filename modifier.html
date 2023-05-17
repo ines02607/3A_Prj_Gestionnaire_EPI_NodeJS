@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Edit</title>
+    <script src="./dashboard.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body onload="prefillForm()">        
+    <div class="modif-box">
+      <h1>Edit</h1>
+      <form id="modificationform" method="put" onsubmit="updateEquipment(); return false;">
+        <label for="id">ID :</label>
+        <input type="text" id="id" name="id"><br><br>
+        <label for="name">Equipment Name :</label>
+        <input type="text" id="name" name="name"><br><br>
+        <label for="description">Description :</label>
+        <input type="text" id="description" name="description"><br><br>
+        <label for="status">Status :</label>
+        <input type="text" id="status" name="status"><br><br>
+        <label for="location">Location :</label>
+        <input type="text" id="location" name="location"><br><br>
+        <label for="owner">Owner :</label>
+        <input type="text" id="owner" name="owner"><br><br>
+        <input id ="submit" type="submit" value="Modification">
+      </form>      
+    </div>
+  </body>
+</html>

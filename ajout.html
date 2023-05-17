@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Edit</title>
+    <script src="./dashboard.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>        
+    <div class="add-box">
+      <h1>Ajouter</h1>
+      <br>
+      <br>
+      <form id="addform" action="/ajouter" method="POST">
+        <label for="name">Nom de l'équipement :</label>
+        <input type="text" id="name" name="name"><br><br>
+        <label for="description">Description :</label>
+        <input type="text" id="description" name="description"><br><br>
+        <label for="status">Status :</label>
+        <input type="text" id="status" name="status"><br><br>
+        <label for="location">Localisation :</label>
+        <input type="text" id="location" name="location"><br><br>
+        <label for="owner">Propriétaire :</label>
+        <input type="text" id="owner" name="owner"><br><br>
+        <input id ="submit" type="submit" value="Ajouter">
+      </form>      
+    </div>
+  </body>
+</html>

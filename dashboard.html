@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="bootstrap.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body id="dashboard">
+    <div id="everything">
+      <br />
+      <div class="header">
+        <h1 id="entreprise"></h1>
+        <h4>Voici un <i>overview</i> de tes stats</h4>
+      </div>
+
+      <br />
+
+      <div class="dashboard-container">
+        <div id="notifs">
+          <div class="notification-panel-header">
+            <h2 id="title"># Tes notifications</h2>
+          </div>
+          <div id="notifications">
+            <div class="notification-panel">
+              <div id="notifications" class="notification-panel-content">
+                <p>Chargement des équipements en panne...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="graphiques-panel">
+          <h2 id="title"># Graphique des états de tes équipements</h2>
+          <br />
+          <h3 id="actifs"></h3>
+          <canvas id="etat-equipements-chart"></canvas>
+          <br />
+        </div>
+      </div>
+      <div class="content">
+        <h2 id="title">
+          # Liste de tes équipements
+          <div id="boutonajouter">
+            <a href="/ajout.html"
+              ><button class="btn btn-success btn-sm">
+                Ajouter un équipement
+              </button></a
+            >
+          </div>
+        </h2>
+        <br /><br />
+        <table id="tabequip" style="width: 90%">
+          <thead>
+            <tr id="entete">
+              <th>#</th>
+              <th>Nom</th>
+              <th>Description</th>
+              <th>Status</th>
+              <th>Localisation</th>
+              <th>Propriétaire</th>
+              <th id="boutontab"></th>
+            </tr>
+          </thead>
+          <tbody id="equipments-table"></tbody>
+        </table>
+      </div>
+      <br />
+      <br />
+    </div>
+  </body>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get("name");
+    document.getElementById("entreprise").textContent = `Dashboard de ${name}`;
+  </script>
+
+  <script src="./dashboard.js"></script>
+</html>
