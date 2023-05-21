@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const app = express();
 
 const fs = require("fs");
-const data = require("./data.json");
+const data = require("../backend/data/data.json");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -17,31 +17,31 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Définition de la route pour la page d'accueil et les pages alternatives
 app.get("/", function (req, res) {
   // Renvoi du fichier index.html
-  res.sendFile(path.resolve("indexpage/index.html"));
+  res.sendFile(path.resolve("../frontend/public/indexpage/index.html"));
 });
 
 app.use("/dashboard.html", function (req, res) {
   res.set("Content-Type", "text/html");
-  res.sendFile(path.join(__dirname, "dashboard.html"));
+  res.sendFile(path.join(__dirname, "../frontend/public/html/dashboard.html"));
 });
 
 app.use("/login.html", function (req, res) {
   res.set("Content-Type", "text/html");
-  res.sendFile(path.join(__dirname, "login.html"));
+  res.sendFile(path.join(__dirname, "../frontend/public/html/login.html"));
 });
 
 app.use("/inscription.html", function (req, res) {
   res.set("Content-Type", "text/html");
-  res.sendFile(path.join(__dirname, "inscription.html"));
+  res.sendFile(path.join(__dirname, "../frontend/public/html/inscription.html"));
 });
 
 app.use('/modifier.html', function (req, res) {
   res.set('Content-Type', 'text/html');
-  res.sendFile(path.join(__dirname, 'modifier.html'));
+  res.sendFile(path.join(__dirname, '../frontend/public/html/modifier.html'));
 });
 
 app.get("/ajout.html", (req, res) => {
-  res.sendFile(path.join(__dirname, "ajout.html"));
+  res.sendFile(path.join(__dirname, "../frontend/public/html/ajout.html"));
 });
 
 
@@ -51,41 +51,41 @@ app.get("/ajout.html", (req, res) => {
 
 app.use("/style.css", function (req, res) {
   res.set("Content-Type", "text/css");
-  res.sendFile(path.join(__dirname, "style.css"));
+  res.sendFile(path.join(__dirname, "../frontend/public/css/style.css"));
 });
 
 // ------------ CSS "inutile" ------------
 app.use("/bootstrap.min.css", function (req, res) {
   res.set("Content-Type", "text/css");
   res.sendFile(
-    path.join(__dirname, "indexpage/vendor/bootstrap/bootstrap.min.css")
+    path.join(__dirname, "../frontend/public/indexpage/vendor/bootstrap/bootstrap.min.css")
   );
 });
 app.use('/bootstrap.min.css', function (req, res) {
   res.set('Content-Type', 'text/css');
-  res.sendFile(path.join(__dirname,  'indexpage/css/bootstrap.min.css'));
+  res.sendFile(path.join(__dirname,  '../frontend/public/indexpage/css/bootstrap.min.css'));
 });
 app.use("/select2.min.css", function (req, res) {
   res.set("Content-Type", "text/css");
   res.sendFile(
-    path.join(__dirname, "indexpage/vendor/select2/select2.min.css")
+    path.join(__dirname, "../frontend/public/indexpage/vendor/select2/select2.min.css")
   );
 });
 app.use("/owl.carousel.min.css", function (req, res) {
   res.set("Content-Type", "text/css");
   res.sendFile(
-    path.join(__dirname, "indexpage/vendor/owlcarousel/owl.carousel.min.css")
+    path.join(__dirname, "../frontend/public/indexpage/vendor/owlcarousel/owl.carousel.min.css")
   );
 });
 app.use("/lightcase.css", function (req, res) {
   res.set("Content-Type", "text/css");
   res.sendFile(
-    path.join(__dirname, "indexpage/vendor/lightcase/lightcase.css")
+    path.join(__dirname, "../frontend/public/indexpage/vendor/lightcase/lightcase.css")
   );
 });
 app.use("/style.min.css", function (req, res) {
   res.set("Content-Type", "text/css");
-  res.sendFile(path.join(__dirname, "indexpage/css/style.min.css"));
+  res.sendFile(path.join(__dirname, "../frontend/public/indexpage/css/style.min.css"));
 });
 // ------------ Fin CSS inutile ------------
 
@@ -93,11 +93,11 @@ app.use("/style.min.css", function (req, res) {
 
 app.use("/dashboard.js", function (req, res) {
   res.set("Content-Type", "text/javascript");
-  res.sendFile(path.join(__dirname, "dashboard.js"));
+  res.sendFile(path.join(__dirname, "../backend/dashboard.js"));
 });
 
 app.get("/data.json", (req, res) => {
-  res.sendFile(path.join(__dirname, "data.json"));
+  res.sendFile(path.join(__dirname, "../backend/data/data.json"));
 });
 
 app.get("/equipments", (req, res) => {
@@ -119,48 +119,48 @@ app.get("/equipments/:id", (req, res) => {
 app.use("/popper.min.js", function (req, res) {
   res.set("Content-Type", "text/javascript");
   res.sendFile(
-    path.join(__dirname, "indexpage/vendor/bootstrap/popper.min.js")
+    path.join(__dirname, "../frontend/public/indexpage/vendor/bootstrap/popper.min.js")
   );
 });
 app.use("/bootstrap.min.js", function (req, res) {
   res.set("Content-Type", "text/javascript");
   res.sendFile(
-    path.join(__dirname, "indexpage/vendor/bootstrap/bootstrap.min.js")
+    path.join(__dirname, "../frontend/public/indexpage/vendor/bootstrap/bootstrap.min.js")
   );
 });
 app.use("/select2.min.js", function (req, res) {
   res.set("Content-Type", "text/javascript");
-  res.sendFile(path.join(__dirname, "indexpage/vendor/select2/select2.min.js"));
+  res.sendFile(path.join(__dirname, "../frontend/public/indexpage/vendor/select2/select2.min.js"));
 });
 app.use("/owl.carousel.min.js", function (req, res) {
   res.set("Content-Type", "text/javascript");
   res.sendFile(
-    path.join(__dirname, "indexpage/vendor/owlcarousel/owl.carousel.min.js")
+    path.join(__dirname, "../frontend/public/indexpage/vendor/owlcarousel/owl.carousel.min.js")
   );
 });
 app.use("/jquery.stellar.js", function (req, res) {
   res.set("Content-Type", "text/javascript");
   res.sendFile(
-    path.join(__dirname, "indexpage/vendor/stellar/jquery.stellar.js")
+    path.join(__dirname, "../frontend/public/indexpage/vendor/stellar/jquery.stellar.js")
   );
 });
 app.use("/isotope.min.js", function (req, res) {
   res.set("Content-Type", "text/javascript");
-  res.sendFile(path.join(__dirname, "indexpage/vendor/isotope/isotope.min.js"));
+  res.sendFile(path.join(__dirname, "../frontend/public/indexpage/vendor/isotope/isotope.min.js"));
 });
 app.use("/lightcase.js", function (req, res) {
   res.set("Content-Type", "text/javascript");
-  res.sendFile(path.join(__dirname, "indexpage/vendor/lightcase/lightcase.js"));
+  res.sendFile(path.join(__dirname, "../frontend/public/indexpage/vendor/lightcase/lightcase.js"));
 });
 app.use("/waypoint.min.js", function (req, res) {
   res.set("Content-Type", "text/javascript");
   res.sendFile(
-    path.join(__dirname, "indexpage/vendor/waypoints/waypoint.min.js")
+    path.join(__dirname, "../frontend/public/indexpage/vendor/waypoints/waypoint.min.js")
   );
 });
 app.use("/app.min.js", function (req, res) {
   res.set("Content-Type", "text/javascript");
-  res.sendFile(path.join(__dirname, "indexpage/js/app.min.js"));
+  res.sendFile(path.join(__dirname, "../frontend/public/indexpage/js/app.min.js"));
 });
 // ------------ Fin JS inutile ------------
 
@@ -168,12 +168,12 @@ app.use("/app.min.js", function (req, res) {
 
 app.use("/obj_triangle.png", function (req, res) {
   res.set("Content-Type", "img/png");
-  res.sendFile(path.join(__dirname, "indexpage/img/obj_triangle.png"));
+  res.sendFile(path.join(__dirname, "../frontend/public/indexpage/img/obj_triangle.png"));
 });
 
 app.use("/background.png", function (req, res) {
   res.set("Content-Type", "img/png");
-  res.sendFile(path.join(__dirname, "indexpage/img/background.png"));
+  res.sendFile(path.join(__dirname, "../frontend/public/indexpage/img/background.png"));
 });
 // ---------------------------------------------------------------------------------------------------------------------------
 
@@ -227,7 +227,7 @@ app.post("/inscription", (req, res) => {
   const { name, username, password } = req.body;
   const newEntreprise = { id: getNewId(), name, username, password };
   data.entreprises.push(newEntreprise);
-  fs.writeFile("./data.json", JSON.stringify(data), (err) => {
+  fs.writeFile("../backend/data/data.json", JSON.stringify(data), (err) => {
     if (err) {
       console.log(err);
       res.status(500).send("Erreur serveur");
@@ -243,7 +243,7 @@ app.post("/ajouter", (req, res) => {
   const { name, description, status, location, owner } = req.body;
   const newEquipment = { id: getNewIdEquip(), name, description, status, location, owner };
   data.equipments.push(newEquipment);
-  fs.writeFile("./data.json", JSON.stringify(data), (err) => {
+  fs.writeFile("../backend/data/data.json", JSON.stringify(data), (err) => {
     if (err) {
       console.log(err);
       res.status(500).send("Erreur serveur");
@@ -260,7 +260,7 @@ app.delete("/equipments/:id", (req, res) => {
   const index = data.equipments.findIndex((equip) => equip.id == id);
   if (index !== -1) {
     data.equipments.splice(index, 1);
-    fs.writeFile("./data.json", JSON.stringify(data), (err) => {
+    fs.writeFile("../backend/data/data.json", JSON.stringify(data), (err) => {
       if (err) {
         console.log(err);
         res.status(500).send("Server error");

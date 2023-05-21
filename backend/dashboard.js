@@ -104,7 +104,7 @@ function countEquipmentsByStatus(equipments, status) {
   return equipments.filter((e) => e.status === status).length;
 }
 
-fetch("data.json")
+fetch("/data.json")
   .then((response) => response.json())
   .then((data) => {
     jsonData = data; // stocker les données dans une variable globale
