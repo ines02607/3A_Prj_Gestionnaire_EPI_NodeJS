@@ -5,6 +5,19 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="bootstrap.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      .location-box {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .location-box input[type="checkbox"] {
+        margin-right: 5px;
+      }
+    </style>
   </head>
   <body id="dashboard">
     <div id="everything">
@@ -37,6 +50,13 @@
           <br />
         </div>
       </div>
+
+      <div class="content">
+        <h2 id="title"> # Localisation de tes équipements </h2>
+        <br>
+      <div class="locations-container"></div>
+      </div>
+
       <div class="content">
         <h2 id="title">
           # Liste de tes équipements

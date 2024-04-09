@@ -16,6 +16,7 @@ fetch("/data.json")
       (equipment) => equipment.owner === companyName
     );
     equipments = companyEquipments;
+
     // Créer les lignes du tableau
     const tableRows = companyEquipments.map(
       (equipment) => `
@@ -35,8 +36,78 @@ fetch("/data.json")
       </tr>
     `
     );
+
     // Ajouter les lignes au tableau dans le HTML
     document.getElementById("equipments-table").innerHTML = tableRows.join("");
+
+    // Créer un tableau contenant les différentes localisations
+    const locations = Array.from(
+      new Set(companyEquipments.map((e) => e.location))
+    );
+
+   // Créer les div de localisations
+const locationsContainer = document.querySelector(".locations-container");
+locationsContainer.innerHTML = ""; // Clear the container to remove previous content
+locations.forEach((location) => {
+  const locationDiv = document.createElement("div");
+  locationDiv.classList.add("location-box");
+  locationDiv.innerHTML = `
+    <div id="single-loc">
+      <label for="${location}-checkbox" class="location-name">${location}</label>
+      <div id="${location}-equipments" class="location-equipments"></div>
+    </div>
+  `;
+  locationsContainer.appendChild(locationDiv);
+});
+
+// Ajouter les équipements aux div de localisations
+companyEquipments.forEach((equipment) => {
+  const equipmentDiv = document.createElement("div");
+  equipmentDiv.classList.add("equipment");
+  equipmentDiv.innerText = equipment.name;
+  const locationEquipments = document.getElementById(
+    `${equipment.location}-equipments`
+  );
+  locationEquipments.appendChild(equipmentDiv);
+});
+
+
+
+// Ajouter le style CSS
+const style = document.createElement("style");
+style.innerHTML = `
+  .locations-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    border: 1px solid white; /* Ajout d'une bordure blanche */
+    padding: 10px; /* Ajout d'un espace intérieur */
+  }
+
+  .location-box {
+    width: calc(33.33% - 20px);
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: #121212; /* Couleur de fond */
+    border: 1px solid white; /* Bordure blanche */
+    border-radius: 5px; /* Coins arrondis */
+    margin: 10px; /* Espacement entre les localisations */
+  }
+
+  .location-name {
+    color: #7f718b;
+    font-weight: bold;
+    text-transform: uppercase;
+
+  }
+
+  .location-equipments {
+    margin-top: 10px;
+    width: 100%;
+  }
+`;
+document.head.appendChild(style);
+
     // Ajouter un gestionnaire d'événement "click" à la table
     document
       .getElementById("equipments-table")
@@ -94,6 +165,7 @@ function getEquipmentsPanne() {
 
 window.onload = function () {
   getEquipmentsPanne();
+  updateLocationEquipments();
 };
 
 function getEquipmentsByCompany(equipments, company) {
@@ -104,15 +176,13 @@ function countEquipmentsByStatus(equipments, status) {
   return equipments.filter((e) => e.status === status).length;
 }
 
-fetch("/data.json")
+fetch("data.json")
   .then((response) => response.json())
   .then((data) => {
     jsonData = data; // stocker les données dans une variable globale
     updateEtatEquipementsChart();
   })
   .catch((error) => console.error(error));
-
-
 
 function createEtatEquipementsChart(equipments) {
   const data = {
@@ -139,14 +209,13 @@ function createEtatEquipementsChart(equipments) {
       maintainAspectRatio: false, // permettre de modifier la hauteur et la largeur indépendamment
       plugins: {
         legend: {
-          position: "top"
-        }
-      }
+          position: "top",
+        },
+      },
     },
     width: 400, // largeur fixe en pixels
-    height: 300 // hauteur fixe en pixels
+    height: 300, // hauteur fixe en pixels
   };
-  
 
   const chartElement = document.getElementById("etat-equipements-chart");
   if (window.equipementsChart) {
@@ -168,6 +237,22 @@ function updateEtatEquipementsChart() {
   etatEquipementsChart.update();
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  
-});
+function updateLocationEquipments() {
+  const locationEquipments = document.querySelectorAll(".location-equipments");
+  locationEquipments.forEach((location) => {
+    const locationName = location.id.split("-")[0];
+    const locationEquipmentsDiv = location.querySelector(".location-equipments-div");
+    locationEquipmentsDiv.innerHTML = "";
+
+    companyEquipments
+      .filter((equipment) => equipment.location === locationName)
+      .forEach((equipment) => {
+        const equipmentDiv = document.createElement("div");
+        equipmentDiv.classList.add("equipment");
+        equipmentDiv.innerText = equipment.name;
+        locationEquipmentsDiv.appendChild(equipmentDiv);
+      });
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {});
