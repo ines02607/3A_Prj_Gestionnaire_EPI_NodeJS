@@ -20,7 +20,7 @@ Bienvenu chez SAFE ! Cette application web est conçue pour aider les entreprise
 
 - Clonez ce dépôt GitHub sur votre machine locale :
 ```bash
-git clone https://github.com/imeneamel/Projet-NodeJS
+git clone https://github.com/ines02607/3A_Prj_Gestionnaire_EPI_NodeJS
 ```
 
 - Accédez au répertoire du projet :
